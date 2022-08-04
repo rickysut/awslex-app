@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Aws\Laravel\AwsServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'AWS' => Aws\Laravel\AwsFacade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 
