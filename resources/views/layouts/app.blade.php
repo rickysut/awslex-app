@@ -22,12 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/ajax/all.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/datatables/buttons.dataTables.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/datatables/select.dataTables.min.css') }}" rel="stylesheet" />
     <style>
     .chat {
         list-style: none;
@@ -141,14 +136,6 @@
         <script type="application/javascript" src="{{ asset('js/jquery/jquery.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/dataTables.bootstrap4.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/dataTables.buttons.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/buttons.flash.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/buttons.html5.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/buttons.print.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/buttons.colVis.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/dataTables.fixedColumns.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/datatables/dataTables.responsive.min.js') }}"></script>
         
         @yield('scripts')
     </div>
