@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Message;
@@ -51,14 +52,13 @@ class MessageController extends Controller
             $lex_user = User::where('name','lex')->first();
             if($result){
                 //broadcast lex result
-                //Log::debug($result);
-                //broadcast(new LexResponseEvent($result->toArray(), $user->id));
+                broadcast(new LexResponseEvent($result->toArray(), $user->id));
                 if($result['message']){
                     $lex_response_message = $lex_user->messages()->create([
                         'message' => $result['message'],
                         'owner_id' => $user->id
                     ]);
-
+                    
                     //broadcast lex response
                     broadcast(new MessageSentEvent($lex_response_message, $lex_user, $user->id));
                 }
@@ -67,7 +67,6 @@ class MessageController extends Controller
         } catch (AwsException $e) {
             // output error message if fails
             error_log($e->getMessage());
-            Log::error($e->getMessage());
         }
 
         

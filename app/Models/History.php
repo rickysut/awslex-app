@@ -9,6 +9,7 @@ class History extends Model
 {
     protected $table = 'history';
     protected $fillable = [
+        'user_id',
         'firstname',
         'lastname',
         'email_address'

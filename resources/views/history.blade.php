@@ -55,7 +55,10 @@
             ajax: "{{ route('getdata') }}",
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'created_at', name: 'created_at' },
+                { data: 'created_at', name: 'created_at', render:function(data){
+                        return moment(data).format('MM-DD-YYYY HH:mm:ss'); 
+                    } 
+                },
                 { data: 'user_id', name: 'user_id' },
                 { data: 'firstname', name: 'firstname' },
                 { data: 'lastname', name: 'lastname' },

@@ -11,5 +11,9 @@ Route::resource('messages', App\Http\Controllers\MessageController::class)->only
     'index',
     'store'
 ]);
+Route::resource('history', App\Http\Controllers\DataController::class)->only([
+    'index',
+    'store'
+]);
 
 Route::get('/messages/clear', [App\Http\Controllers\MessageController::class, 'clearMessages'])->name('clear-messages');

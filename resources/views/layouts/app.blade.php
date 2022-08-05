@@ -136,6 +136,8 @@
         <script type="application/javascript" src="{{ asset('js/jquery/jquery.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('js/datatables/datetime.js') }}"></script>
+        <script type="application/javascript" src="{{ asset('js/datatables/moment.min.js') }}"></script>
         
         @yield('scripts')
     </div>

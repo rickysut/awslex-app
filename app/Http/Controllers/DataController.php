@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\History;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class DataController extends Controller
 {
@@ -68,7 +70,17 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        //Log::debug($request);
+        $message = $request;
+        //Log::info($message->slots['firstName']);
+        $his = new History;
+        $his->user_id = $user->id;
+        $his->firstname = $message->slots['firstName'];
+        $his->lastname = $message->slots['lastName'];
+        $his->email_address = $message->slots['email'];
+        $his->save();
+        return response()->json(['status' => 'Message Saved']);
     }
 
     /**

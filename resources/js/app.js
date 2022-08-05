@@ -51,18 +51,23 @@ const app = new Vue({
     },
 
     created() {
-        this.fetchMessages();
+        this.fetchMessages(); //get user messages
 
         Echo.private('chat.' + this.$userId)
             .listen('.chat.message-sent', (e) => {
+                // console.log(e.message.message);
                 this.messages.push({
                     message: e.message.message,
                     user: e.user
                 });
             })
             .listen('.chat.lex-response-received', (e) => {
-                console.log("aws:",e.message);
+                //console.log("aws:",e.message.message);
                 this.lexData = e.message;
+                if (this.lexData.message.indexOf('Thank you')==0){
+                    console.log("Ending");  
+                    this.addHistory(this.lexData); 
+                }
             });
     },
 
@@ -77,18 +82,26 @@ const app = new Vue({
             });
         },
 
-        clearMessages() {
+        clearMessages() { //Clear messages table 
             axios.get('/messages/clear').then(response => {
                 this.messages = response.data;
             });
         },
 
-        addMessage(message) {
+        addMessage(message) { //post new message into messages table 
             axios.post('/messages', message).then(response => {
                 console.log(response.data);
             });
             this.newMessage = '';
         },
+
+        addHistory(message) { //post new history into history table 
+            axios.post('/history', message).then(response => {
+                console.log(response.data);
+            });
+        },
+
+
 
     }
 });
