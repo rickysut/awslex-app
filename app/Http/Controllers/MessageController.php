@@ -36,7 +36,7 @@ class MessageController extends Controller
             'owner_id' => $user->id
         ]);
         // broadcast user message
-        broadcast(new MessageSentEvent($message, $user, $user->id));
+        //broadcast(new MessageSentEvent($message, $user, $user->id));
 
         $client = App::make('aws')->createClient('LexRuntimeService');
         try {
@@ -52,7 +52,7 @@ class MessageController extends Controller
             $lex_user = User::where('name','lex')->first();
             if($result){
                 //broadcast lex result
-                broadcast(new LexResponseEvent($result->toArray(), $user->id));
+                //broadcast(new LexResponseEvent($result->toArray(), $user->id));
                 if($result['message']){
                     $lex_response_message = $lex_user->messages()->create([
                         'message' => $result['message'],
@@ -60,7 +60,7 @@ class MessageController extends Controller
                     ]);
                     
                     //broadcast lex response
-                    broadcast(new MessageSentEvent($lex_response_message, $lex_user, $user->id));
+                    //broadcast(new MessageSentEvent($lex_response_message, $lex_user, $user->id));
                 }
             }
             
@@ -70,7 +70,9 @@ class MessageController extends Controller
         }
 
         
-        return response()->json(['status' => 'Message Sent']);
+        // return response()->json(['status' => 'Message Sent']);
+        $sentResponse = array(  'user' => $lex_user, 'message' => $result['message'], 'aws' => $result->toArray() );
+        return response()->json($sentResponse);
     }
 
     public function clearMessages()

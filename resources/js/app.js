@@ -52,23 +52,6 @@ const app = new Vue({
 
     created() {
         this.fetchMessages(); //get user messages
-
-        Echo.private('chat.' + this.$userId)
-            .listen('.chat.message-sent', (e) => {
-                // console.log(e.message.message);
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user
-                });
-            })
-            .listen('.chat.lex-response-received', (e) => {
-                //console.log("aws:",e.message.message);
-                this.lexData = e.message;
-                if (this.lexData.message.indexOf('Thank you')==0){
-                    console.log("Ending");  
-                    this.addHistory(this.lexData); 
-                }
-            });
     },
 
     updated: function () {
@@ -89,8 +72,26 @@ const app = new Vue({
         },
 
         addMessage(message) { //post new message into messages table 
+            //console.log(message);
+            this.messages.push({
+                message: message.message,
+                user: message.user
+            });
             axios.post('/messages', message).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
+                // console.log(response.data.aws);
+                // 
+                this.messages.push({
+                    message: response.data.message,
+                    user: response.data.user
+                });
+
+                this.lexData = response.data.aws;
+                if (this.lexData.message.indexOf('Thank you')==0){
+                    //console.log("Ending");  
+                    this.addHistory(this.lexData);  
+                }
+                
             });
             this.newMessage = '';
         },
